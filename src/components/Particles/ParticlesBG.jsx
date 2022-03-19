@@ -26,7 +26,7 @@ const particleOptions = {
         quantity: 4,
       },
       repulse: {
-        distance: 100,
+        distance: 75,
         duration: 0.4,
       },
     },
@@ -39,7 +39,7 @@ const particleOptions = {
       color: "#ffffff",
       distance: 150,
       enable: true,
-      opacity: 0.5,
+      opacity: .75,
       width: 1,
     },
     collisions: {
@@ -56,19 +56,19 @@ const particleOptions = {
     number: {
       density: {
         enable: true,
-        area: 800,
+        area: 400,
       },
       value: 80,
     },
     opacity: {
-      value: 0.5,
+      value: 0.7,
     },
     shape: {
       type: "circle",
     },
     size: {
       random: true,
-      value: 5,
+      value: 3,
     },
   },
   detectRetina: true,
@@ -79,7 +79,7 @@ const ParticlesBG = () => {
     < Particles className="particles"
       params={particleOptions}
     />
-  )
+  );
 }
 
 
