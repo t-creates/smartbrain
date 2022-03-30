@@ -1,5 +1,5 @@
 import React from 'react';
-// import './SignIn.css';
+
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -27,8 +27,9 @@ class SignIn extends React.Component {
         password: this.state.signInPassword
       })
     }).then(response => response.json())
-      .then(data => {
-        if (data === 'success') {
+      .then(user => {
+        if (user.id) { // Checks if user exists, did we recieve a user with a property of id? 
+          this.props.loadUser(user);
           this.props.onRouteChange('home');
         }
       })
