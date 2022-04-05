@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation.jsx';
 import Logo from './components/Logo/Logo.jsx';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm.jsx'
@@ -9,11 +8,6 @@ import SignIn from './components/SignIn/SignIn.jsx'
 import Register from './components/Register/Register.jsx'
 import ParticlesBG from "./components/Particles/ParticlesBG.jsx";
 import './App.css';
-
-// API
-const app = new Clarifai.App({
-  apiKey: '44568a297a0f4119b0f6e64d93aec392'
-});
 
 const intitalState = {
   input: '',
@@ -75,8 +69,15 @@ class App extends Component {
 
   // Submitting image url to Clarifai face-detection model, We calculate face location with respones
   onButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input })
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    this.setState({ imageUrl: this.state.input });
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(response => response.json())
       .then(response => {
         if (response) {
           fetch('http://localhost:3000/image', {
